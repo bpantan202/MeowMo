@@ -1,0 +1,30 @@
+{
+    "name": "meowmo",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/bpantan202/MeowMo#readme",
+    "bugs": {
+        "url": "https://github.com/bpantan202/MeowMo/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bpantan202/MeowMo.git"
+    },
+    "license": "ISC",
+    "author": "",
+    "type": "commonjs",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon server.js",
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.9"
+    }
+}
