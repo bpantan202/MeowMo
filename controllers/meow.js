@@ -1,21 +1,65 @@
-exports.getMeows = (req, res, next) => {
-  res.status(200).json({ success: true, msg: "Meow Meow" });
+const Meow = require("../model/Meow");
+
+exports.getMeows = async (req, res, next) => {
+    try {
+        const meows = await Meow.find();
+        res.status(200).json({ success: true, data: meows });
+
+    }catch (err) {
+        res.status(400).json({ success: false });
+      }
 };
 
-exports.getMeow = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Meow id ${req.params.id}` });
+exports.getMeow = async (req, res, next) => {
+  try {
+    const meow = await Meow.findById(req.params.id);
+
+    if (!meow) {
+      res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: meow });
+  } catch (err) {
+    res.status(400).json({ success: false });
+  }
 };
 
-exports.createMeow = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Create new Meow` });
+exports.createMeow = async (req, res, next) => {
+  try {
+    const meow = await Meow.create(req.body);
+    res.status(200).json({ success: true, data: meow });
+  } catch (err) {
+    res.status(400).json({ success: false });
+  }
 };
 
-exports.updateMeow = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Edit Meow id ${req.params.id}` });
+exports.updateMeow = async (req, res, next) => {
+    try {
+        const meow = await Meow.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+    
+        if (!meow) {
+          res.status(400).json({ success: false });
+        }
+    
+        res.status(200).json({ success: true, data: meow });
+      } catch (err) {
+        res.status(400).json({ success: false });
+      }
 };
 
-exports.deleteMeow = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Remove Meow id ${req.params.id}` });
+exports.deleteMeow = async (req, res, next) => {
+    try {
+        const meow = await Meow.findByIdAndDelete(req.params.id);
+    
+        if (!meow) {
+          res.status(400).json({ success: false });
+        }
+    
+        res.status(200).json({ success: true, data: {} });
+      } catch (err) {
+        res.status(400).json({ success: false });
+      }
 };

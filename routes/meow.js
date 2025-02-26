@@ -1,5 +1,5 @@
 const express = require("express");
-const {getMeows, getMeow, createMeow, updateMeow, deleteMeow} = require('../controllers/meow')
+const {getMeows, getMeow, createMeow, updateMeow, deleteMeow} = require('../controllers/Meow')
 
 const router = express.Router();
 

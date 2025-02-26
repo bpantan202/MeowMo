@@ -1,15 +1,33 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
-//Route files
-const meow = require('./routes/meow')
+const connectDB = require("./config/db");
 
 //Load env vars
-dotenv.config({path:'./config/config.env'});
+dotenv.config({ path: "./config/config.env" });
+
+//Connect to database
+connectDB();
+
+//Route files
+const meow = require("./routes/Meow");
 
 const app = express();
 
-app.use('/meow',meow)
+//Body parser
+app.use(express.json());
+
+app.use("/meow", meow);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`Server running in`, process.env.NODE_ENV, ` mode on port `, PORT));
+
+const server = app.listen(
+  PORT,
+  console.log(`Server running in`, process.env.NODE_ENV, ` mode on port `, PORT)
+);
+
+//Handle unhandled promise rejections
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Error: ${err.massage}`);
+  //Close server & exit process
+  server.close(() => process.exit(1));
+});
