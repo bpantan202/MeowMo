@@ -1,8 +1,8 @@
-const Meow = require("../model/Meow");
+const Meow_log = require("../model/Meow_log");
 
 exports.getMeows = async (req, res, next) => {
     try {
-        const meows = await Meow.find();
+        const meows = await Meow_log.find();
         res.status(200).json({ success: true, data: meows });
 
     }catch (err) {
@@ -12,7 +12,7 @@ exports.getMeows = async (req, res, next) => {
 
 exports.getMeow = async (req, res, next) => {
   try {
-    const meow = await Meow.findById(req.params.id);
+    const meow = await Meow_log.findById(req.params.id);
 
     if (!meow) {
       res.status(400).json({ success: false });
@@ -26,7 +26,7 @@ exports.getMeow = async (req, res, next) => {
 
 exports.createMeow = async (req, res, next) => {
   try {
-    const meow = await Meow.create(req.body);
+    const meow = await Meow_log.create(req.body);
     res.status(200).json({ success: true, data: meow });
   } catch (err) {
     res.status(400).json({ success: false });
@@ -35,7 +35,7 @@ exports.createMeow = async (req, res, next) => {
 
 exports.updateMeow = async (req, res, next) => {
     try {
-        const meow = await Meow.findByIdAndUpdate(req.params.id, req.body, {
+        const meow = await Meow_log.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         });
@@ -52,7 +52,7 @@ exports.updateMeow = async (req, res, next) => {
 
 exports.deleteMeow = async (req, res, next) => {
     try {
-        const meow = await Meow.findByIdAndDelete(req.params.id);
+        const meow = await Meow_log.findByIdAndDelete(req.params.id);
     
         if (!meow) {
           res.status(400).json({ success: false });

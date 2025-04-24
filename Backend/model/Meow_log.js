@@ -19,4 +19,4 @@ const MeowSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('meow', MeowSchema)
+module.exports = mongoose.model('meow_log', MeowSchema)
